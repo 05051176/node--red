@@ -1,0 +1,116 @@
+[
+    {
+        "id": "fcee206b.81266",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "59d85d39.24d184",
+        "type": "http in",
+        "z": "fcee206b.81266",
+        "name": "",
+        "url": "/data",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "588cf996.a35968",
+        "type": "debug",
+        "z": "fcee206b.81266",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "eb94cffc.ec1b",
+        "type": "http response",
+        "z": "fcee206b.81266",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "37db93e5.ebccfc",
+        "type": "http in",
+        "z": "fcee206b.81266",
+        "name": "",
+        "url": "/pin4",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 80,
+        "y": 300,
+        "wires": [
+            [
+                "746d50b8.535c7"
+            ]
+        ]
+    },
+    {
+        "id": "1b85e700.8b0e09",
+        "type": "rpi-gpio in",
+        "z": "fcee206b.81266",
+        "name": "GPIO4",
+        "pin": "7",
+        "intype": "up",
+        "debounce": "25",
+        "read": true,
+        "x": 110,
+        "y": 360,
+        "wires": [
+            [
+                "4f47d8c0.0c8288"
+            ]
+        ]
+    },
+    {
+        "id": "4f47d8c0.0c8288",
+        "type": "function",
+        "z": "fcee206b.81266",
+        "name": "Set GPIO",
+        "func": "global.set(\"GPIO\",msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 240,
+        "y": 340,
+        "wires": [
+            [
+                "588cf996.a35968"
+            ]
+        ]
+    },
+    {
+        "id": "746d50b8.535c7",
+        "type": "function",
+        "z": "fcee206b.81266",
+        "name": "Get GPIO",
+        "func": "msg.payload = global.get(\"GPIO\");\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "eb94cffc.ec1b",
+                "588cf996.a35968"
+            ]
+        ]
+    }
+]

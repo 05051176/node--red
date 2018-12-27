@@ -1,0 +1,88 @@
+[
+    {
+        "id": "aa3b5235.f7996",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "69773dc9.a22914",
+        "type": "inject",
+        "z": "aa3b5235.f7996",
+        "name": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "x": 110,
+        "y": 100,
+        "wires": [
+            [
+                "40c4d696.399c68"
+            ]
+        ]
+    },
+    {
+        "id": "40c4d696.399c68",
+        "type": "function",
+        "z": "aa3b5235.f7996",
+        "name": "payload",
+        "func": "msg.headers={\n    deviceKey: \"2vEV0mSMQFddKKSF\"\n    };\n    \nmsg.payload= \"Temperature,,99.8\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "fd846698.bebdd8"
+            ]
+        ]
+    },
+    {
+        "id": "fd846698.bebdd8",
+        "type": "http request",
+        "z": "aa3b5235.f7996",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "url": "https://api.mediatek.com/mcs/v2/devices/D06UVBod/datapoints.csv",
+        "tls": "",
+        "x": 430,
+        "y": 240,
+        "wires": [
+            [
+                "28f08926.746856",
+                "184d4f83.75d31"
+            ]
+        ]
+    },
+    {
+        "id": "28f08926.746856",
+        "type": "http response",
+        "z": "aa3b5235.f7996",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "184d4f83.75d31",
+        "type": "debug",
+        "z": "aa3b5235.f7996",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 550,
+        "y": 400,
+        "wires": []
+    }
+]
